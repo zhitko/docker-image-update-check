@@ -231,7 +231,7 @@ send_data_to_influxdb() {
 CRONJOB_SCHEDULE="00 01 * * *"
 add_to_cronjob() {
     log "add_to_cronjob"
-    local CRONJOB_COMMAND=".$(realpath "${BASH_SOURCE[0]}")"
+    local CRONJOB_COMMAND="cd $( dirname -- "$( readlink -f -- "${BASH_SOURCE[0]}"; )"; ) && bash $(basename "${BASH_SOURCE[0]}")"
     log "add_to_cronjob: CRON_COMMAND=$CRONJOB_COMMAND"
     local CRONJOB="$CRONJOB_SCHEDULE $CRONJOB_COMMAND"
     log "add_to_cronjob: CRONJOB=$CRONJOB"
